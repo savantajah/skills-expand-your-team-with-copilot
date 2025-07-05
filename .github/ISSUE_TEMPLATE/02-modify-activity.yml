@@ -1,0 +1,173 @@
+name: ✏️ Modify Existing Activity
+description: Request changes to an existing extracurricular activity or program
+title: "[MODIFY ACTIVITY] Update: "
+labels: ["enhancement", "modify-activity"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✏️ Modify Existing Activity Request
+        
+        Use this form to request changes to an existing extracurricular activity or program in the Mergington High School system.
+        
+        **Please provide specific details about what needs to be changed so the Copilot coding agent can implement this accurately.**
+
+  - type: dropdown
+    id: existing_activity
+    attributes:
+      label: Activity to Modify
+      description: Which existing activity needs to be updated?
+      options:
+        - Chess Club
+        - Programming Class  
+        - Morning Fitness
+        - Soccer Team
+        - Basketball Team
+        - Art Workshop
+        - Math Competition Team
+        - Debate Team
+        - Weekend Robotics Workshop
+        - Science Olympiad
+        - Sunday Chess Tournament
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes_requested
+    attributes:
+      label: What Changes Are Needed?
+      description: Describe exactly what should be modified about this activity
+      placeholder: |
+        Examples:
+        - Change meeting days from Monday/Friday to Tuesday/Thursday
+        - Increase maximum participants from 15 to 25
+        - Update description to include new curriculum
+        - Change start time from 3:30 PM to 4:00 PM
+        - Add weekend practice sessions
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: change_categories
+    attributes:
+      label: Types of Changes (Select all that apply)
+      options:
+        - label: Schedule/Time changes
+        - label: Participant capacity changes
+        - label: Description/content updates
+        - label: Location changes
+        - label: Teacher/supervisor changes
+        - label: Requirements or prerequisites
+        - label: Other modifications
+
+  - type: textarea
+    id: new_description
+    attributes:
+      label: New Description (if applicable)
+      description: If updating the activity description, provide the new text here
+      placeholder: e.g., "Learn advanced programming concepts including web development, mobile apps, and artificial intelligence through hands-on projects and coding challenges."
+
+  - type: input
+    id: new_schedule_days
+    attributes:
+      label: New Schedule Days (if applicable)
+      description: If changing days, list them comma-separated
+      placeholder: e.g., "Monday, Wednesday, Friday" or "Tuesday, Thursday"
+
+  - type: input
+    id: new_start_time
+    attributes:
+      label: New Start Time (if applicable)
+      description: If changing start time, use 24-hour format HH:MM
+      placeholder: e.g., "15:30" for 3:30 PM, "07:00" for 7:00 AM
+
+  - type: input
+    id: new_end_time
+    attributes:
+      label: New End Time (if applicable)
+      description: If changing end time, use 24-hour format HH:MM
+      placeholder: e.g., "17:00" for 5:00 PM, "08:30" for 8:30 AM
+
+  - type: input
+    id: new_max_participants
+    attributes:
+      label: New Maximum Participants (if applicable)
+      description: If changing participant limit, specify the new number
+      placeholder: e.g., "20", "30", "50"
+
+  - type: dropdown
+    id: change_urgency
+    attributes:
+      label: Implementation Timeline
+      description: When do these changes need to be implemented?
+      options:
+        - Immediately (emergency change)
+        - Within this week
+        - Within this month  
+        - Before next semester
+        - No specific deadline
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason_for_change
+    attributes:
+      label: Reason for Changes
+      description: Why are these modifications needed? This helps prioritize and understand context.
+      placeholder: e.g., "Room availability changed", "Increased student interest", "Curriculum updates", "Schedule conflicts with other activities"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Check all that apply for what success looks like
+      options:
+        - label: Changes are reflected on the website activities list
+          required: true
+        - label: Existing student registrations are preserved (unless capacity reduced)
+          required: true
+        - label: New schedule/details display correctly
+          required: true
+        - label: Teachers can continue managing the updated activity
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Implementation Hints for Copilot Agent
+        
+        **Files to modify:**
+        - `src/backend/database.py` - Update the specific activity in `initial_activities` dictionary
+        - May need to update frontend if schedule format changes significantly
+        
+        **Important considerations:**
+        - Preserve existing participant registrations unless capacity is reduced
+        - Update both the human-readable schedule string and schedule_details object
+        - If reducing max_participants, handle the case where current participants exceed new limit
+        - Test that all existing functionality still works after changes
+        
+        **Data structure to update:**
+        ```python
+        "Activity Name": {
+            "description": "Updated description",
+            "schedule": "Updated human readable schedule",
+            "schedule_details": {
+                "days": ["Updated", "Days"],
+                "start_time": "HH:MM",
+                "end_time": "HH:MM"
+            },
+            "max_participants": updated_number,
+            "participants": [existing_participants]  # Preserve unless capacity issues
+        }
+        ```
+        
+        **Testing checklist:**
+        - Verify changes appear correctly on website
+        - Check existing registrations are preserved
+        - Test new schedule displays properly
+        - Confirm registration functionality still works

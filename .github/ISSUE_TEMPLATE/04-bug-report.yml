@@ -1,0 +1,186 @@
+name: 🐛 Bug Report
+description: Report a problem or issue with the school activities system
+title: "[BUG] "
+labels: ["bug"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 Bug Report
+        
+        Found a problem with the Mergington High School activities system? Report it here so we can fix it quickly.
+        
+        **Please provide detailed information to help reproduce and fix the issue.**
+
+  - type: dropdown
+    id: bug_area
+    attributes:
+      label: What part of the system has the problem?
+      description: Which area or feature is not working correctly?
+      options:
+        - Student registration for activities
+        - Teacher login/authentication
+        - Activity list display
+        - Activity search/filtering
+        - Student unregistration
+        - Activity schedule display
+        - Participant count/capacity
+        - Website loading or performance
+        - Mobile/responsive display
+        - Data not saving
+        - Other (describe in details)
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: What's Wrong?
+      description: Describe the problem clearly and specifically
+      placeholder: |
+        Example: "When I try to register a student for Chess Club, I get an error message saying 'Failed to sign up' even though there are open spots available."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: What Should Happen?
+      description: Describe what you expected to work correctly
+      placeholder: |
+        Example: "The student should be successfully registered for Chess Club and appear in the participants list."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: How to Reproduce the Problem
+      description: List the exact steps someone can follow to see this bug
+      placeholder: |
+        Example:
+        1. Go to the activities website
+        2. Click "Register" on Chess Club
+        3. Enter student email "test@mergington.edu"
+        4. Click the Register button
+        5. See the error message appear
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How Often Does This Happen?
+      description: Is this a consistent problem or intermittent?
+      options:
+        - Every time (always happens)
+        - Most of the time (happens frequently)
+        - Sometimes (happens occasionally)
+        - Rarely (happened once or twice)
+        - Only under specific conditions
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected_users
+    attributes:
+      label: Who is Affected?
+      description: Which users experience this problem?
+      options:
+        - All teachers
+        - Specific teacher accounts
+        - All students trying to register
+        - Students in specific activities
+        - Anyone using the website
+        - Only me
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: browser_device
+    attributes:
+      label: Browser and Device
+      description: What browser and device were you using when this happened?
+      placeholder: e.g., "Chrome on Windows laptop", "Safari on iPad", "Firefox on Mac"
+
+  - type: textarea
+    id: error_messages
+    attributes:
+      label: Error Messages
+      description: Copy any error messages you see (exact text if possible)
+      placeholder: |
+        Example: "Error 500: Internal Server Error" or "Failed to update activity" or "Username not found"
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Information
+      description: Any other details that might help understand or fix this issue?
+      placeholder: |
+        Examples:
+        - "This started happening after the last update"
+        - "Only affects activities with more than 20 participants"
+        - "Problem occurs during peak usage times"
+        - "Screenshots or recordings available"
+
+  - type: dropdown
+    id: impact_severity
+    attributes:
+      label: How Urgent is This?
+      description: How much does this problem affect school operations?
+      options:
+        - Critical (system completely broken, blocks all work)
+        - High (major feature broken, significantly impacts daily work)
+        - Medium (feature partially broken, workarounds possible)
+        - Low (minor issue, doesn't significantly impact work)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria for Fix
+      description: Check all that apply for what success looks like
+      options:
+        - label: The reported issue no longer occurs
+          required: true
+        - label: The feature works as originally intended
+          required: true
+        - label: No new issues are introduced by the fix
+          required: true
+        - label: The fix is tested and verified working
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Debugging Hints for Copilot Agent
+        
+        **Investigation approach:**
+        1. **Reproduce the issue** - Follow the exact steps provided
+        2. **Check logs** - Look for error messages in browser console or server logs
+        3. **Identify root cause** - Trace through the code path that's failing
+        4. **Verify fix** - Ensure the fix works and doesn't break other functionality
+        
+        **Common areas to check:**
+        - **Backend API endpoints** (`src/backend/routers/`) - Check for proper error handling
+        - **Database operations** (`src/backend/database.py`) - Verify data operations work correctly
+        - **Frontend JavaScript** (`src/static/app.js`) - Check for JavaScript errors or logic issues
+        - **Authentication** (`src/backend/routers/auth.py`) - Verify login/session handling
+        
+        **Files likely involved:**
+        - `src/backend/routers/activities.py` - Activity registration logic
+        - `src/backend/routers/auth.py` - Teacher authentication
+        - `src/backend/database.py` - Data storage and retrieval
+        - `src/static/app.js` - Frontend behavior and API calls
+        - `src/static/index.html` - UI elements and forms
+        
+        **Testing checklist:**
+        - Reproduce the exact issue described
+        - Verify the fix resolves the problem
+        - Test related functionality hasn't broken
+        - Check edge cases and error conditions
+        - Confirm the fix works across different browsers if applicable

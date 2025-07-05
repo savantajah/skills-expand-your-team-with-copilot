@@ -1,0 +1,207 @@
+name: 👥 Student Registration Issue
+description: Report problems with student sign-ups, withdrawals, or registration management
+title: "[REGISTRATION] "
+labels: ["bug", "registration"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 👥 Student Registration Issue
+        
+        Having trouble with student registrations, withdrawals, or managing sign-ups? Report it here.
+        
+        **This template is for registration-specific issues. For general bugs, use the Bug Report template.**
+
+  - type: dropdown
+    id: registration_issue_type
+    attributes:
+      label: What type of registration issue?
+      description: Choose the option that best describes the problem
+      options:
+        - Cannot register student for activity
+        - Cannot remove student from activity
+        - Student appears registered but shouldn't be
+        - Capacity/participant limit not working correctly
+        - Registration showing wrong information
+        - Authentication problem when registering
+        - Registration confirmation not working
+        - Bulk registration issues
+        - Other registration problem
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected_activity
+    attributes:
+      label: Which activity is affected?
+      description: Select the activity having registration problems
+      options:
+        - Chess Club
+        - Programming Class  
+        - Morning Fitness
+        - Soccer Team
+        - Basketball Team
+        - Art Workshop
+        - Math Competition Team
+        - Debate Team
+        - Weekend Robotics Workshop
+        - Science Olympiad
+        - Sunday Chess Tournament
+        - All activities
+        - Multiple activities (list in description)
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: student_information
+    attributes:
+      label: Student Information
+      description: Provide details about the student(s) affected (use fake/example emails for privacy)
+      placeholder: |
+        Example:
+        - Student email: student123@mergington.edu
+        - Currently registered: Yes/No
+        - Should be registered: Yes/No
+        - Other relevant details about the student's registration status
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: Detailed Problem Description
+      description: Describe exactly what's happening with the registration
+      placeholder: |
+        Example: "When I try to register student123@mergington.edu for Chess Club, I get logged in as mrodriguez, click Register, enter the email, and click Register button. The system shows 'Registration successful' but the student doesn't appear in the participants list."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: List the exact steps to reproduce this registration issue
+      placeholder: |
+        Example:
+        1. Log in as teacher (mrodriguez)
+        2. Navigate to Chess Club activity
+        3. Click "Register" button
+        4. Enter student email: student123@mergington.edu
+        5. Click "Register" button
+        6. See success message but student not in list
+    validations:
+      required: true
+
+  - type: input
+    id: current_participants
+    attributes:
+      label: Current Participant Count
+      description: How many students are currently registered for this activity?
+      placeholder: e.g., "8 out of 12 maximum"
+
+  - type: input
+    id: teacher_account
+    attributes:
+      label: Teacher Account Used
+      description: Which teacher account were you using when this happened?
+      placeholder: e.g., "mrodriguez", "mchen", "principal"
+
+  - type: checkboxes
+    id: attempted_solutions
+    attributes:
+      label: What have you tried?
+      description: Select any troubleshooting steps you've already attempted
+      options:
+        - label: Tried logging out and back in
+        - label: Tried different browser
+        - label: Verified student email is correct
+        - label: Checked activity capacity isn't full
+        - label: Tried registering different student
+        - label: Tried different activity
+        - label: Refreshed the page
+        - label: Waited and tried again later
+
+  - type: textarea
+    id: error_messages
+    attributes:
+      label: Error Messages or Confirmations
+      description: Copy any error messages or unexpected confirmation messages you see
+      placeholder: |
+        Example: "Registration successful" or "Failed to sign up. Please try again." or "You must be logged in as a teacher to register students."
+
+  - type: dropdown
+    id: when_started
+    attributes:
+      label: When did this problem start?
+      description: Help us understand if this is a new issue or ongoing problem
+      options:
+        - Just started happening today
+        - Started this week
+        - Has been happening for several weeks
+        - This is the first time I've tried this action
+        - Not sure when it started
+        - This has never worked for me
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria for Fix
+      description: Check all that apply for what success looks like
+      options:
+        - label: Can successfully register students for activities
+          required: true
+        - label: Can successfully remove students from activities
+          required: true
+        - label: Registration status displays accurately
+          required: true
+        - label: Capacity limits work correctly
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Debugging Hints for Copilot Agent
+        
+        **Registration system components to check:**
+        
+        **Backend registration logic:**
+        - `src/backend/routers/activities.py` - `signup_for_activity()` and `unregister_from_activity()` functions
+        - Check authentication verification
+        - Verify database update operations
+        - Confirm participant list management
+        
+        **Frontend registration handling:**
+        - `src/static/app.js` - Form submission handlers for signup/unregister
+        - Check API call formatting and error handling
+        - Verify UI updates after registration actions
+        
+        **Common registration issues:**
+        1. **Authentication failures** - Check teacher login validation
+        2. **Database update failures** - Verify MongoDB operations work
+        3. **Capacity checking** - Ensure participant limits are enforced correctly
+        4. **Email validation** - Check student email format validation
+        5. **UI sync issues** - Verify frontend refreshes after backend changes
+        
+        **Files to investigate:**
+        - `src/backend/routers/activities.py` - Main registration logic
+        - `src/backend/database.py` - Data persistence and participant management
+        - `src/static/app.js` - Frontend registration forms and API calls
+        - `src/backend/routers/auth.py` - Teacher authentication verification
+        
+        **Testing checklist:**
+        - Test registration with valid teacher account
+        - Test registration with invalid/no authentication
+        - Test registration when activity is at capacity
+        - Test unregistration functionality
+        - Verify participant list updates correctly
+        - Check error messages are helpful and accurate
+        
+        **Data verification:**
+        - Check that participant arrays are properly updated in the database
+        - Verify capacity limits are respected
+        - Confirm registration status reflects in the UI accurately

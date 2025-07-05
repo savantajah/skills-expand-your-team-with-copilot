@@ -1,0 +1,158 @@
+name: 🗑️ Remove Activity
+description: Request to remove or discontinue an extracurricular activity
+title: "[REMOVE ACTIVITY] Remove: "
+labels: ["enhancement", "remove-activity"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🗑️ Remove Activity Request
+        
+        Use this form to request removal of an extracurricular activity or program from the Mergington High School system.
+        
+        **⚠️ Warning: This action will remove the activity and all associated student registrations.**
+
+  - type: dropdown
+    id: activity_to_remove
+    attributes:
+      label: Activity to Remove
+      description: Which activity should be removed from the system?
+      options:
+        - Chess Club
+        - Programming Class  
+        - Morning Fitness
+        - Soccer Team
+        - Basketball Team
+        - Art Workshop
+        - Math Competition Team
+        - Debate Team
+        - Weekend Robotics Workshop
+        - Science Olympiad
+        - Sunday Chess Tournament
+        - Other (specify in reason)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: removal_urgency
+    attributes:
+      label: When should this be removed?
+      description: Timeline for removing the activity
+      options:
+        - Immediately (emergency removal)
+        - End of current week
+        - End of current month
+        - End of semester
+        - End of school year
+    validations:
+      required: true
+
+  - type: textarea
+    id: removal_reason
+    attributes:
+      label: Reason for Removal
+      description: Why does this activity need to be removed? This is important for understanding and documentation.
+      placeholder: |
+        Examples:
+        - Low student enrollment
+        - Supervisor/teacher no longer available
+        - Budget constraints
+        - Facility no longer available
+        - Activity relocated to different system
+        - Replaced by different program
+    validations:
+      required: true
+
+  - type: input
+    id: current_participants
+    attributes:
+      label: Current Number of Participants
+      description: Approximately how many students are currently enrolled?
+      placeholder: e.g., "8", "15", "0"
+
+  - type: checkboxes
+    id: student_notification
+    attributes:
+      label: Student Communication
+      description: How will enrolled students be notified?
+      options:
+        - label: I will personally notify all enrolled students
+        - label: School administration will handle student notification
+        - label: No students are currently enrolled
+        - label: Students have already been notified through other means
+
+  - type: textarea
+    id: replacement_activity
+    attributes:
+      label: Replacement or Alternative Activity (Optional)
+      description: Is there a replacement activity or should students be directed elsewhere?
+      placeholder: e.g., "Students should be directed to the Chess Club instead", "New activity 'Advanced Programming' will replace this", "No replacement needed"
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation and Authorization
+      description: Please confirm your understanding and authorization
+      options:
+        - label: I understand this will permanently remove the activity from the system
+          required: true
+        - label: I understand all student registrations for this activity will be removed
+          required: true
+        - label: I have proper authorization to request this removal
+          required: true
+        - label: I have considered the impact on currently enrolled students
+          required: true
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Check all that apply for what success looks like
+      options:
+        - label: Activity no longer appears in the activities list
+          required: true
+        - label: Students cannot register for this activity
+          required: true
+        - label: All associated data is properly removed
+          required: true
+        - label: No broken links or references remain in the system
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Implementation Hints for Copilot Agent
+        
+        **Files to modify:**
+        - `src/backend/database.py` - Remove the activity from `initial_activities` dictionary
+        - Check if frontend code has any hardcoded references that need updating
+        
+        **Important considerations:**
+        - This is a destructive operation - double-check the activity name
+        - Remove the entire activity entry from the database initialization
+        - Consider if any frontend code specifically references this activity
+        - Verify the activity name exactly matches what's in the code
+        
+        **Data structure to remove:**
+        Remove the entire activity object from `initial_activities`:
+        ```python
+        # Remove this entire block:
+        "Activity Name": {
+            "description": "...",
+            "schedule": "...",
+            "schedule_details": {...},
+            "max_participants": ...,
+            "participants": [...]
+        }
+        ```
+        
+        **Testing checklist:**
+        - Verify activity no longer appears on website
+        - Confirm no errors when loading activities page
+        - Check that other activities still work normally
+        - Test that removed activity name cannot be used for registration
+        
+        **⚠️ Safety Note:**
+        This is a permanent removal. Make sure the activity name is exactly correct and the removal is truly intended.
