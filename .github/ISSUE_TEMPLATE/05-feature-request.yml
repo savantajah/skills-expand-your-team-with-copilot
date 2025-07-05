@@ -1,0 +1,195 @@
+name: 💡 Feature Request
+description: Suggest a new feature or improvement for the school activities system
+title: "[FEATURE] "
+labels: ["enhancement", "feature-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Feature Request
+        
+        Have an idea to improve the Mergington High School activities system? Share it here!
+        
+        **Please provide detailed information about what you'd like to see added or improved.**
+
+  - type: dropdown
+    id: feature_category
+    attributes:
+      label: What type of feature is this?
+      description: Choose the category that best describes your request
+      options:
+        - User Interface (UI) improvement
+        - New activity management feature
+        - Student registration enhancement
+        - Teacher/admin functionality
+        - Reporting or analytics
+        - Performance improvement
+        - Mobile/accessibility improvement
+        - Integration with other systems
+        - Security enhancement
+        - Other improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: Feature Description
+      description: Describe the new feature or improvement you'd like to see
+      placeholder: |
+        Example: "Add a calendar view that shows all activities for the week/month so teachers can see scheduling conflicts and students can better plan their participation."
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: What Problem Does This Solve?
+      description: Explain what current challenge or limitation this feature would address
+      placeholder: |
+        Example: "Currently, it's hard to see scheduling conflicts between activities, and students have to check each activity individually to plan their week."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: How do you envision this working? Describe the functionality in detail.
+      placeholder: |
+        Example: "Add a calendar view page that shows:
+        - Weekly and monthly views
+        - Activities displayed as colored blocks by time
+        - Click on activity to see details and register
+        - Filter by activity type or day
+        - Export to personal calendar"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_users
+    attributes:
+      label: Who Would Use This Feature?
+      description: Which users would primarily benefit from this feature?
+      options:
+        - Teachers/Activity supervisors
+        - Students
+        - School administrators
+        - Parents/guardians
+        - All users
+        - System administrators
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature_priority
+    attributes:
+      label: How Important is This Feature?
+      description: What priority level would you assign to this request?
+      options:
+        - High (would significantly improve daily operations)
+        - Medium (would be a helpful improvement)
+        - Low (nice to have enhancement)
+        - Enhancement (quality of life improvement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use Cases and Examples
+      description: Provide specific examples of how this feature would be used
+      placeholder: |
+        Example use cases:
+        1. Teacher wants to schedule new activity without conflicts
+        2. Student wants to see all their weekly activities at once
+        3. Administrator needs to view facility usage patterns
+        4. Parent wants to export child's activity schedule to family calendar
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives_considered
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered other ways to solve this problem? What makes your proposed solution the best?
+      placeholder: |
+        Example: "Could use external calendar app, but integration within the school system would be more convenient and ensure data consistency."
+
+  - type: checkboxes
+    id: similar_features
+    attributes:
+      label: Related Features
+      description: Are there similar features you've seen in other systems that inspire this request?
+      options:
+        - label: I've seen similar features in other school management systems
+        - label: I've seen this in other scheduling/calendar applications
+        - label: This is based on feedback from teachers/students
+        - label: This addresses a specific workflow problem we've observed
+        - label: This is a completely new idea
+
+  - type: textarea
+    id: technical_considerations
+    attributes:
+      label: Technical Considerations (Optional)
+      description: Any technical aspects, limitations, or requirements to consider?
+      placeholder: |
+        Example: "Should work on mobile devices", "Needs to integrate with existing user authentication", "Should be fast even with many activities"
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Check all that apply for what success would look like
+      options:
+        - label: Feature works as described in the proposal
+          required: true
+        - label: Feature integrates well with existing functionality
+          required: true
+        - label: Feature is intuitive and easy to use
+          required: true
+        - label: Feature doesn't negatively impact system performance
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Implementation Hints for Copilot Agent
+        
+        **Development approach:**
+        1. **Analyze requirements** - Break down the feature into specific functional requirements
+        2. **Design approach** - Consider how this fits with existing architecture
+        3. **Identify files to modify** - Determine backend and frontend changes needed
+        4. **Plan implementation** - Start with minimal viable version, then enhance
+        5. **Test thoroughly** - Ensure new feature doesn't break existing functionality
+        
+        **Common implementation areas:**
+        
+        **Backend changes** (if needed):
+        - `src/backend/routers/` - New API endpoints
+        - `src/backend/database.py` - Data model changes
+        - New router files for complex features
+        
+        **Frontend changes** (likely needed):
+        - `src/static/index.html` - New UI elements
+        - `src/static/app.js` - New JavaScript functionality
+        - `src/static/style.css` - Styling for new features
+        
+        **Feature implementation patterns:**
+        - **UI enhancements** - Modify HTML/CSS/JavaScript
+        - **New data features** - Add database fields and API endpoints
+        - **Workflow improvements** - Update existing functions and add validation
+        - **Reporting features** - Create new views and data aggregation
+        
+        **Testing checklist:**
+        - Feature works as described in all scenarios
+        - Existing functionality remains unaffected
+        - Feature handles edge cases gracefully
+        - UI is responsive and accessible
+        - Performance impact is acceptable
+        
+        **Documentation to update:**
+        - Update API documentation if new endpoints added
+        - Consider updating user guides or help text

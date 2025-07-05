@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🚨 Emergency Support
+    url: mailto:principal@mergington.edu
+    about: For urgent issues that require immediate attention, contact the principal directly
+  - name: 📚 Documentation  
+    url: https://github.com/savantajah/skills-expand-your-team-with-copilot/blob/main/docs/how-to-develop.md
+    about: Read the development guide and system documentation

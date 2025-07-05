@@ -1,0 +1,154 @@
+name: 🎯 Add New Activity
+description: Request to add a new extracurricular activity or program to the system
+title: "[NEW ACTIVITY] Add: "
+labels: ["enhancement", "new-activity"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎯 Add New Activity Request
+        
+        Use this form to request adding a new extracurricular activity or program to the Mergington High School system.
+        
+        **Please fill out all required fields so the Copilot coding agent can implement this without additional questions.**
+
+  - type: input
+    id: activity_name
+    attributes:
+      label: Activity Name
+      description: What is the name of the new activity/program?
+      placeholder: e.g., "Drama Club", "Science Olympiad", "Cooking Class"
+    validations:
+      required: true
+
+  - type: textarea
+    id: activity_description
+    attributes:
+      label: Activity Description
+      description: Provide a clear description of what this activity involves
+      placeholder: e.g., "Students will learn acting skills, perform in school plays, and develop public speaking confidence through drama exercises and theatrical productions."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: schedule_days
+    attributes:
+      label: Days of the Week
+      description: Which days will this activity meet?
+      multiple: true
+      options:
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+        - Sunday
+    validations:
+      required: true
+
+  - type: input
+    id: start_time
+    attributes:
+      label: Start Time
+      description: What time does the activity start? (Use 24-hour format HH:MM)
+      placeholder: e.g., "15:30" for 3:30 PM, "07:00" for 7:00 AM
+    validations:
+      required: true
+
+  - type: input
+    id: end_time
+    attributes:
+      label: End Time
+      description: What time does the activity end? (Use 24-hour format HH:MM)
+      placeholder: e.g., "17:00" for 5:00 PM, "08:30" for 8:30 AM
+    validations:
+      required: true
+
+  - type: input
+    id: max_participants
+    attributes:
+      label: Maximum Participants
+      description: How many students can participate in this activity?
+      placeholder: e.g., "15", "25", "50"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: activity_category
+    attributes:
+      label: Activity Category
+      description: What type of activity is this?
+      options:
+        - Academic (study groups, competitions, tutoring)
+        - Sports (athletic teams, fitness, outdoor activities)
+        - Arts (music, drama, visual arts, creative writing)
+        - Technology (programming, robotics, digital media)
+        - Community Service (volunteering, environmental, social causes)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: initial_participants
+    attributes:
+      label: Initial Participants (Optional)
+      description: List any students who should be pre-registered (one email per line)
+      placeholder: |
+        student1@mergington.edu
+        student2@mergington.edu
+        student3@mergington.edu
+
+  - type: textarea
+    id: additional_requirements
+    attributes:
+      label: Additional Requirements or Notes
+      description: Any special requirements, equipment needs, location preferences, or other important details?
+      placeholder: e.g., "Requires art supplies budget", "Needs access to computer lab", "Outdoor activity - weather dependent"
+
+  - type: checkboxes
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Check all that apply for what success looks like
+      options:
+        - label: Activity appears in the activities list on the website
+          required: true
+        - label: Students can register for the activity through the website
+          required: true
+        - label: Activity shows correct schedule and participant limit
+          required: true
+        - label: Teachers can manage student registrations for this activity
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Implementation Hints for Copilot Agent
+        
+        **Files to modify:**
+        - `src/backend/database.py` - Add new activity to `initial_activities` dictionary
+        - Consider if frontend categorization in `src/static/app.js` needs updates
+        
+        **Data structure required:**
+        ```python
+        "Activity Name": {
+            "description": "Activity description",
+            "schedule": "Human readable schedule string",
+            "schedule_details": {
+                "days": ["Monday", "Wednesday"],
+                "start_time": "HH:MM",
+                "end_time": "HH:MM"
+            },
+            "max_participants": number,
+            "participants": []  # Start empty or with initial participants
+        }
+        ```
+        
+        **Testing checklist:**
+        - Verify activity appears on website
+        - Test student registration functionality
+        - Check schedule display is correct
+        - Confirm participant limits work
